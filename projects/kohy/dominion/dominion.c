@@ -645,12 +645,15 @@ int getCost(int cardNumber)
 }
 
 //Assignment #2, Refactor 'Adventurer'
-int adventurerEffect(int currentPlayer, struct gameState *state, int temphand[]){
+int adventurerEffect(int currentPlayer, struct gameState *state){
   int cardDrawn;
   int drawntreasure = 0;
   int z = 0;
+  int temphand[MAX_HAND];
   while(drawntreasure < 2) {
-    if (state->deckCount[currentPlayer] < 1) {//if the deck is empty we need to shuffle discard and add to deck
+    //if the deck is empty we need to shuffle discard and add to deck
+    //*Introduce a Bug: Instead of shuffling discard empty deck, this will result shuffle the deck with 1 or 0 card
+    if (state->deckCount[currentPlayer] < 2) {
       shuffle(currentPlayer, state);
     }
     drawCard(currentPlayer, state);
@@ -709,7 +712,8 @@ int counsil_RoomEffect(int currentPlayer, struct gameState *state, int handPos)
     }
   }     
   //put played card in played card pile
-  discardCard(handPos, currentPlayer, state, 0);      
+  //*Introduce a Bug: Trash a card from hand instead of discard
+  discardCard(handPos, currentPlayer, state, 1);      
   return 0;
 }
 
@@ -724,8 +728,8 @@ int villageEffect(int currentPlayer, struct gameState *state, int handPos)
   state->numActions = state->numActions + 2; 
 
   //discard played card from hand
-  //*Introduce a Bug: Trash a card from hand instead of discard
-  discardCard(handPos, currentPlayer, state, 1);
+  
+  discardCard(handPos, currentPlayer, state, 0);
   return 0;
 }
 
@@ -770,7 +774,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   {
     case adventurer:
       //call the adventurer card effect function
-      adventurerEffect(currentPlayer, state, temphand);
+      adventurerEffect(currentPlayer, state);
       return 0;
 		
     case smithy:
