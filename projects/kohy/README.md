@@ -1,2 +1,2 @@
-My name is Hyejin Ko, kohy
+ kohy-assignment-3
 
