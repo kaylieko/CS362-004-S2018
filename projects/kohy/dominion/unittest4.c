@@ -38,7 +38,7 @@ int main () {
 
 	memset(&G, 23, sizeof(struct gameState));		// clear the game state
 	initializeGame(numPlayer, k, seed, &G);			// initialize a new game
-	int currentPlayer = whoseTurn(&G);				// determining the player
+	int currentPlayer = whoseTurn(&G);			// determining the player
 
 	printf("[Test4-1] Beginning of the game, Every player has 5 cards in hand \n\n");
 	for (player = 0; player < 3; player++){
@@ -72,8 +72,8 @@ int main () {
 	printf("\n[Test4-3] Testing a player's numHandCards after drawCard. \n\n");
 	memset(&G, 23, sizeof(struct gameState));		// clear the game state
 	initializeGame(numPlayer, k, seed, &G);			// initialize a new game
-	drawCard(thisPlayer, &G);						// to draw is to take a card from your deck and put it into your hand.
-	returnStatus = 6;								// so now, player1 has 6 cards
+	drawCard(thisPlayer, &G);			// to draw is to take a card from your deck and put it into your hand.
+	returnStatus = 6;			// so now, thisPlayer has 6 cards
 	if (numHandCards(&G) == returnStatus){
 		printf ("Draw card: this player now has %i", returnStatus);
 		printf (" cards in hand. ");
