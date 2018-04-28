@@ -49,7 +49,7 @@ int main(){
 	printf ("This player has %i card(s) in hand.\n", beforeSmithy);	
 
 	G.hand[thisPlayer][G.handCount[thisPlayer]] = smithy;			// add 'Smithy' card for current player:
-	G.handCount[thisPlayer]++;							// now currentPlayer has +1 card (=6) in hand
+	G.handCount[thisPlayer]++;						// now currentPlayer has +1 card (=6) in hand
 
 	int afterSmithy = G.handCount[thisPlayer];				// check num of cards in this player's hand
 	printf ("This player gained a smithy card, now he has %i card(s) in hand.\n", afterSmithy);	
@@ -69,8 +69,8 @@ int main(){
 		
 
 	printf("[CardTest1-2] Number of cards in player's DECK.\n");
-	expectedResult = deckCardsNum - 3;						// smithy: player gets 3 cards in hand from his deck
-	testedResult = G.deckCount[thisPlayer];						// test number of cards in player's deck
+	expectedResult = deckCardsNum - 3;					// smithy: player gets 3 cards in hand from his deck
+	testedResult = G.deckCount[thisPlayer];					// test number of cards in player's deck
 	if (testedResult != expectedResult) {
 		printf ("(This player supposed to have %i cards in deck, but he has %i cards in deck instead...)\n --> ", expectedResult, testedResult);
 	} else {
