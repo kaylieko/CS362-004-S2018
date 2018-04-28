@@ -49,7 +49,7 @@ int main(){
 	int beforeVillage = G.handCount[thisPlayer];				// check num of cards in this player's hand
 	printf ("This player has %i starting card(s) in hand.\n", beforeVillage);	
 
-	G.hand[thisPlayer][G.handCount[thisPlayer]] = village;			// add 'Smithy' card for current player:
+	G.hand[thisPlayer][G.handCount[thisPlayer]] = village;			// add 'village' card for current player:
 	G.handCount[thisPlayer]++;						// now currentPlayer has +1 card (=6) in hand
 
 	int afterVillage = G.handCount[thisPlayer];				// check num of cards in this player's hand
@@ -86,7 +86,7 @@ int main(){
 	expectedResult = numAction + 2;				// village: gets +2 actions
 	testedResult = G.numActions;
 	if (testedResult != expectedResult) {
-		printf ("(This player supposed to get +%i actions, but he has %i action instead...)\n --> ", expectedResult, testedResult);
+		printf ("(This player supposed to have %i actions now, but he has %i action instead...)\n --> ", expectedResult, testedResult);
 	} else {
 		printf ("(This player has %i actions as expected.)\n --> ", testedResult);
 	}
