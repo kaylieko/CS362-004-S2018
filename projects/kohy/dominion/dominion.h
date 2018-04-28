@@ -117,6 +117,11 @@ int whoseTurn(struct gameState *state);
 int endTurn(struct gameState *state);
 /* Must do phase C and advance to next player; do not advance whose turn
    if game is over */
+int adventurerEffect(int currentPlayer, struct gameState *state);
+int smithyEffect(int currentPlayer, struct gameState *state, int handPos);
+int counsil_RoomEffect(int currentPlayer, struct gameState *state, int handPos);
+int villageEffect(int currentPlayer, struct gameState *state, int handPos);
+int great_HallEffect(int currentPlayer, struct gameState *state, int handPos);
 
 int isGameOver(struct gameState *state);
 
