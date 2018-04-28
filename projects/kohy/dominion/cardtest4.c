@@ -49,7 +49,7 @@ int main(){
 	int beforeGH = G.handCount[thisPlayer];				// check num of cards in this player's hand
 	printf ("This player has %i starting card(s) in hand.\n", beforeGH);	
 
-	G.hand[thisPlayer][G.handCount[thisPlayer]] = great_hall;			// add 'Smithy' card for current player:
+	G.hand[thisPlayer][G.handCount[thisPlayer]] = great_hall;			// add 'great_hall' card for current player:
 	G.handCount[thisPlayer]++;						// now currentPlayer has +1 card (=6) in hand
 
 	int afterGH = G.handCount[thisPlayer];				// check num of cards in this player's hand
