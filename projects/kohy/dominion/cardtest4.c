@@ -43,7 +43,7 @@ int main(){
 	initializeGame(numPlayer, k, seed, &G);			// initialize a new game
 
 	printf ("\n=====================================================\n");
-	printf ("	  CARDTEST #3 Great Hall		\n");
+	printf ("	  CARDTEST #4 Great Hall		\n");
 	printf ("=====================================================\n");
 
 	int beforeGH = G.handCount[thisPlayer];				// check num of cards in this player's hand
@@ -62,7 +62,7 @@ int main(){
 
 
 	printf("[CardTest3-1] Number of cards in player's HAND.\n");
-	villageEffect(thisPlayer, &G, handPos);					// play the great_hall card
+	great_HallEffect(thisPlayer, &G, handPos);					// play the great_hall card
 	expectedResult = afterGH + drawCard - playedCard;			// expect to have 6 cards in hand (+1drawed - 1played): 6+1-1=6
 	testedResult = G.handCount[thisPlayer];							
 	if (testedResult != expectedResult) {
