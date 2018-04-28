@@ -45,19 +45,19 @@ int main(){
 	printf ("	  CARDTEST #1 Smithy		\n");
 	printf ("=====================================================\n");
 
-	int beforeSmithy = G.handCount[thisPlayer];						// check num of cards in this player's hand
+	int beforeSmithy = G.handCount[thisPlayer];				// check num of cards in this player's hand
 	printf ("This player has %i card(s) in hand.\n", beforeSmithy);	
 
 	G.hand[thisPlayer][G.handCount[thisPlayer]] = smithy;			// add 'Smithy' card for current player:
-	G.handCount[thisPlayer]++;										// now currentPlayer has +1 card (=6) in hand
+	G.handCount[thisPlayer]++;							// now currentPlayer has +1 card (=6) in hand
 
-	int afterSmithy = G.handCount[thisPlayer];						// check num of cards in this player's hand
+	int afterSmithy = G.handCount[thisPlayer];				// check num of cards in this player's hand
 	printf ("This player gained a smithy card, now he has %i card(s) in hand.\n", afterSmithy);	
 	deckCardsNum = 	G.deckCount[thisPlayer];
 	printf("Number of cards in this player's deck: %i\n\n", deckCardsNum);	// check number of cards in this player's deck
 
 	printf("[CardTest1-1] Number of cards in player's HAND.\n");
-	smithyEffect(thisPlayer, &G, handPos);							// play the smithy card
+	smithyEffect(thisPlayer, &G, handPos);					// play the smithy card
 	expectedResult = afterSmithy + drawCards - playedCard;			// expect to have +2 cards (+3drawed - 1played): 6+3-1=8
 	testedResult = G.handCount[thisPlayer];							
 	if (testedResult != expectedResult) {
@@ -69,7 +69,7 @@ int main(){
 		
 
 	printf("[CardTest1-2] Number of cards in player's DECK.\n");
-	expectedResult = deckCardsNum - 3;							// smithy: player gets 3 cards in hand from his deck
+	expectedResult = deckCardsNum - 3;						// smithy: player gets 3 cards in hand from his deck
 	testedResult = G.deckCount[thisPlayer];						// test number of cards in player's deck
 	if (testedResult != expectedResult) {
 		printf ("(This player supposed to have %i cards in deck, but he has %i cards in deck instead...)\n --> ", expectedResult, testedResult);
