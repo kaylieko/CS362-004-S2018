@@ -1,9 +1,9 @@
 /************************************************************************
 *	Assignment3 Hyejin Ko
-*	cardtest4.c
+*	cardtest2.c
 * 
-*	cardtest4: cardtest4.c dominion.o rngs.o
-*		gcc -o cardtest4 -g  cardtest4.c dominion.o rngs.o $(CFLAGS)
+*	cardtest2: cardtest2.c dominion.o rngs.o
+*		gcc -o cardtest2 -g  cardtest2.c dominion.o rngs.o $(CFLAGS)
 ************************************************************************/
 #include "dominion.h"
 #include "dominion_helpers.h"
@@ -13,7 +13,7 @@
 #include "rngs.h"
 #include <stdlib.h>
 
-#define TESTCARD "great_hall"
+#define TESTCARD "adventurer"
 
 void asserttrue (int test, int expect){
 	if (test == expect){
@@ -32,6 +32,7 @@ int main(){
 	int numAction;	
 	int deckTreasureCounter = 0;
 	int handTreasureCounter = 0;
+	int newHandTreasureCounter = 0;
 	int card;
 	int i;
 
@@ -46,17 +47,19 @@ int main(){
 
 	int k[10] = {adventurer, smithy, council_room, village, great_hall, gardens, steward, feast, minion, embargo};
 	
-	int playedCard = 1;		// 1 Great_hall card will be played
-	int drawCard = 1;		// increase player's handsize by drawing 1 card
+	int playedCard = 1;			// 1 adventurer card will be played
+	int gainedCards = 2;		// increase player's handsize by gaining 2 cards
 
 	struct gameState G;
 	initializeGame(numPlayer, k, seed, &G);			// initialize a new game
 
+
+	//Reveal cards from your deck until you reveal 2 Treasure cards. 
 	printf ("\n=====================================================\n");
-	printf ("	  CARDTEST #4 Great Hall		\n");
+	printf ("	  CARDTEST #2 Adventurer		\n");
 	printf ("=====================================================\n");
 
-	printf("******* [CardTest4] Check Initial Game Status *******\n");
+	printf("******* [CardTest2] Check Initial Game Status *******\n");
 
 	// check num of cards in this player's default hand
 	handCardsNum = G.handCount[thisPlayer];							
@@ -90,14 +93,15 @@ int main(){
 
 
 
-	// Great_hall card effect,	
-	cardEffect(great_hall, choice1, choice2, choice3, &G, handPos, 0);
+	// Adventurer card effect,	
+	cardEffect(adventurer, choice1, choice2, choice3, &G, handPos, 0);
 
 
 
-	printf("[CardTest3-1] Number of cards in player's HAND.\n");
-	// expect to have 6 cards in hand (+1drawed - 1played): 6+1-1=6
-	expectedResult = handCardsNum + drawCard - playedCard;			
+
+	printf("\n*******[CardTest2-1] Number of cards in player's HAND.*******\n");
+	// expect to have 7 cards in hand (+2 treasure cards gained)
+	expectedResult = handCardsNum + gainedCards - playedCard;			
 	testedResult = G.handCount[thisPlayer];							
 	if (testedResult != expectedResult) {
 		printf ("(This player supposed to have %i cards in hand, but he has %i cards in hand instead...)\n --> ", expectedResult, testedResult);
@@ -105,35 +109,26 @@ int main(){
 		printf ("(This player has %i cards in hand as expected.)\n --> ", testedResult);
 	}
 	asserttrue(testedResult, expectedResult); 
-
-
-	// great_hall: player gets 1 card in hand from his deck,
-	printf("[CardTest3-2] Number of cards in player's DECK.\n");
-	// so now it should be 4=5-1
-	expectedResult = deckCardsNum - 1;					
-	testedResult = G.deckCount[thisPlayer];	
+	
+	
+	// After adventurer, 
+	// check num of treasure cards in this player's hand
+	printf("*******[CardTest2-2] Number of treature cards in player's HAND.*******\n");
+	// expect to have 6 treasure cards in hand (+2 treasure cards gained)
+	expectedResult = handTreasureCounter + 2;
+	for (i = 0; i < G.handCount[thisPlayer]; i++) {							
+        card = G.hand[thisPlayer][i];										
+        if (card == copper || card == silver || card == gold) {
+            newHandTreasureCounter++;
+        }
+    }
+	testedResult = newHandTreasureCounter;
 	if (testedResult != expectedResult) {
-		printf ("(This player supposed to have %i cards in deck, but he has %i cards in deck instead...)\n --> ", expectedResult, testedResult);
+		printf ("(This player supposed to have %i treasures in hand, but he has %i treasures in hand instead...)\n --> ", expectedResult, testedResult);
 	} else {
-		printf ("(This player has %i cards in deck as expected.)\n --> ", testedResult);
+		printf ("(This player has %i treasures in hand as expected.)\n --> ", testedResult);
 	}
-	// test number of cards in player's deck				
-	asserttrue(expectedResult, testedResult);
-
-
-
-	// great_hall: gets +1 action
-	printf("[CardTest3-3] Great_hall card gives the player +1 actions. \n");
-	expectedResult = numAction + 1;				
-	testedResult = G.numActions;
-	if (testedResult != expectedResult) {
-		printf ("(This player supposed to have %i actions, but he has %i action instead...)\n --> ", expectedResult, testedResult);
-	} else {
-		printf ("(This player has %i actions as expected.)\n --> ", testedResult);
-	}
-	asserttrue(expectedResult, testedResult);
-
-
+	asserttrue(testedResult, expectedResult); 
 
 
 	return 0;

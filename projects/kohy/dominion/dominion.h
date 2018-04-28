@@ -89,6 +89,8 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 
 Cards not in game should initialize supply position to -1 */
 
+
+
 int shuffle(int player, struct gameState *state);
 /* Assumes all cards are now in deck array (or hand/played):  discard is
  empty */
@@ -117,11 +119,6 @@ int whoseTurn(struct gameState *state);
 int endTurn(struct gameState *state);
 /* Must do phase C and advance to next player; do not advance whose turn
    if game is over */
-int adventurerEffect(int currentPlayer, struct gameState *state);
-int smithyEffect(int currentPlayer, struct gameState *state, int handPos);
-int counsil_RoomEffect(int currentPlayer, struct gameState *state, int handPos);
-int villageEffect(int currentPlayer, struct gameState *state, int handPos);
-int great_HallEffect(int currentPlayer, struct gameState *state, int handPos);
 
 int isGameOver(struct gameState *state);
 
