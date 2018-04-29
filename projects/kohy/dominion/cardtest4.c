@@ -1,6 +1,6 @@
 /************************************************************************
 *	Assignment3 Hyejin Ko
-*	cardtest4.c
+*	cardtest4.c Great_Hall
 * 
 *	cardtest4: cardtest4.c dominion.o rngs.o
 *		gcc -o cardtest4 -g  cardtest4.c dominion.o rngs.o $(CFLAGS)
