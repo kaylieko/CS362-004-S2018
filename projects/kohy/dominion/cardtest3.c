@@ -1,6 +1,6 @@
 /************************************************************************
 *	Assignment3 Hyejin Ko
-*	cardtest3.c
+*	cardtest3.c Village
 * 
 *	cardtest3: cardtest3.c dominion.o rngs.o
 *		gcc -o cardtest3 -g  cardtest3.c dominion.o rngs.o $(CFLAGS)
