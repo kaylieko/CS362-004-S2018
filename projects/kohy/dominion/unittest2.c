@@ -32,14 +32,14 @@ int main(){
 	
 	struct gameState G;
 
-	printf ("\n=====================================================\n");
-	printf ("	  UNITTEST #2 whoseTurn():		\n");
-	printf ("=====================================================\n");
+	printf ("\n===============================================================\n");
+	printf ("	  		UNITTEST #2 whoseTurn():		\n");
+	printf ("===============================================================\n");
     
 	memset(&G, 23, sizeof(struct gameState));		// clear the game state
 	initializeGame(numPlayer, k, seed, &G);			// initialize a new game
 
-	printf("[Test2-1] First player should be player1.\n");
+	printf("\n[Test2-1] First player should be player1.\n");
 	asserttrue (whoseTurn(&G), player1);
 
 	endTurn(&G);
