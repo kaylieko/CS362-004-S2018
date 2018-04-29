@@ -1,6 +1,6 @@
 /************************************************************************
 *	Assignment3 Hyejin Ko
-*	cardtest1.c
+*	cardtest1.c Smithy
 * 
 *	cardtest1: cardtest1.c dominion.o rngs.o
 *		gcc -o cardtest1 -g  cardtest1.c dominion.o rngs.o $(CFLAGS)
