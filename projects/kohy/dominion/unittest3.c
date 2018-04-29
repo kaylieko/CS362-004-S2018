@@ -14,7 +14,7 @@
 
 void asserttrue (int test, int expect){
 	if (test == expect){
-		printf("Test PASSED!\n\n");
+		printf("Test PASSED! \n\n");
 	} 
 	else {
 		printf("Test FAILED!\n\n");
@@ -29,9 +29,9 @@ int main(){
 	
 	struct gameState G;
 
-	printf ("\n=====================================================\n");
-	printf ("	  UNITTEST #3 isGameOver():		\n");
-	printf ("=====================================================\n");
+	printf ("\n====================================================================\n");
+	printf ("	  		UNITTEST #3 isGameOver():		\n");
+	printf ("====================================================================\n");
     
 	memset(&G, 23, sizeof(struct gameState));		// clear the game state
 	initializeGame(numPlayer, k, seed, &G);			// initialize a new game
@@ -64,6 +64,7 @@ int main(){
 		printf ("The game ends successfully.");
 	}
 	asserttrue(isGameOver(&G), returnStatus);
+
 
 	return 0;
 }
