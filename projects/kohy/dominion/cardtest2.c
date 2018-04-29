@@ -1,6 +1,6 @@
 /************************************************************************
 *	Assignment3 Hyejin Ko
-*	cardtest2.c
+*	cardtest2.c Adventurer
 * 
 *	cardtest2: cardtest2.c dominion.o rngs.o
 *		gcc -o cardtest2 -g  cardtest2.c dominion.o rngs.o $(CFLAGS)
@@ -47,7 +47,6 @@ int main(){
 
 	int k[10] = {adventurer, smithy, council_room, village, great_hall, gardens, steward, feast, minion, embargo};
 	
-	int playedCard = 1;			// 1 adventurer card will be played
 	int gainedCards = 2;		// increase player's handsize by gaining 2 cards
 
 	struct gameState G;
@@ -101,7 +100,7 @@ int main(){
 
 	printf("\n*******[CardTest2-1] Number of cards in player's HAND.*******\n");
 	// expect to have 7 cards in hand (+2 treasure cards gained)
-	expectedResult = handCardsNum + gainedCards - playedCard;			
+	expectedResult = handCardsNum + gainedCards;			
 	testedResult = G.handCount[thisPlayer];							
 	if (testedResult != expectedResult) {
 		printf ("(This player supposed to have %i cards in hand, but he has %i cards in hand instead...)\n --> ", expectedResult, testedResult);
