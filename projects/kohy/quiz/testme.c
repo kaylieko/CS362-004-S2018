@@ -16,6 +16,7 @@ char inputChar()
 	return randChar;
 }
 
+//reference https://www.geeksforgeeks.org/program-generate-random-alphabets/
 char *inputString()
 {
 	int i;
