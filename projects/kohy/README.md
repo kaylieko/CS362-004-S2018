@@ -1,2 +1,2 @@
- kohy-assignment-3
+ kohy-random-quiz
 
