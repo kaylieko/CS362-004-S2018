@@ -21,7 +21,7 @@ char *inputString()
 {
 	int i;
 	int numPredefinedString = 5; //size of predefined string = 'reset'
-	char isString[numPredefinedString+1]; // C string with max. 5 chars + NULL terminator 
+	char isString[numPredefinedString+1]; // C string with 5 chars + NULL terminator 
 		
 	//generate 5 random characters in a string
 	for (i = 0; i < numPredefinedString; i++) {
