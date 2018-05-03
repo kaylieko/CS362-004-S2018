@@ -11,10 +11,9 @@ char inputChar()
 	int randNum = rand()%range + 32;
 
 	//convert a random number to a char type.
-    char randChar = (char) randNum;
+	char randChar = (char) randNum;
 
-    return randChar;
-
+	return randChar;
 }
 
 char *inputString()
@@ -23,7 +22,7 @@ char *inputString()
 	int numPredefinedString = 5; //size of predefined string = 'reset'
 	char isString[numPredefinedString+1]; // C string with max. 5 chars + NULL terminator 
 		
-    //generate 5 random characters in a string
+	//generate 5 random characters in a string
 	for (i = 0; i < numPredefinedString; i++) {
 		// a=97 to z=122
 		int range = 122 - 97 + 1;
@@ -35,8 +34,8 @@ char *inputString()
 	//set the last character as trailing null
 	isString[5] = '\0';
 
-    char *randString = isString;
-    return randString;
+	char *randString = isString;
+	return randString;
 }
 
 void testme()
