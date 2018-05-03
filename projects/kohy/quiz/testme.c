@@ -33,7 +33,7 @@ char *inputString()
 		char randChar = (char) randNum;
 		isString[i] = randChar;
 	}
-	//set the last character as trailing null
+	//set the last character as a null terminator
 	isString[5] = '\0';
 	char *randString = isString;
 	//returns a string composed of randomly chosen characters.
