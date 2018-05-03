@@ -34,7 +34,7 @@ char *inputString()
 	//set the last character as trailing null
 	isString[5] = '\0';
 	char *randString = isString;
-	//returns a string composed of concatenating randomly chosen characters.
+	//returns a string composed of randomly chosen characters.
 	return randString;
 }
 
