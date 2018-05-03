@@ -27,6 +27,7 @@ char *inputString()
 	for (i = 0; i < numPredefinedString; i++) {
 		// a=97 to z=122
 		int range = 122 - 97 + 1;
+		// generate random number in the range
 		int randNum = rand()%range + 97;
 		// convert a random number to a char type.
 		char randChar = (char) randNum;
