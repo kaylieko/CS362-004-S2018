@@ -28,7 +28,7 @@ char *inputString()
 		int range = 122 - 97 + 1;
 		int randNum = rand()%range + 97;
 		// convert a random number to a char type.
-    	char randChar = (char) randNum;
+		char randChar = (char) randNum;
 		isString[i] = randChar;
 	}
 	//set the last character as trailing null
