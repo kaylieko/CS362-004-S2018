@@ -27,16 +27,14 @@ int main(){
 	int choice1 = 0;
 	int choice2 = 0;
 	int choice3 = 0;
-
+	int error = 0;
 	int k[10] = {adventurer, smithy, council_room, village, great_hall, gardens, steward, feast, minion, embargo};
 
 	struct gameState G;
-
 	int i, j, m;
 	int numPlayers;
 	int treasureHand;
 	int postTreasureHand;
-	int error = 0;
 
 	printf ("\n===============================================================\n");
 	printf ("	  	RANDOMTEST Adventurer		\n");
