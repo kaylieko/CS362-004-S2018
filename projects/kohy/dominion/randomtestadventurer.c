@@ -77,14 +77,14 @@ int main(){
 		}
 
 		// at least one adventurer is present in current player's hand
-    	G.hand[thisPlayer][0] = adventurer;
+		G.hand[thisPlayer][0] = adventurer;
 
 
 		//adventurer card effect	
 		cardEffect(adventurer, choice1, choice2, choice3, &G, handPos, 0);
 
 
-
+		//check number of treasures in hand after adventurer card
 		postTreasureHand = 0;
 		for(m = 0; m < G.handCount[thisPlayer]; m++){
 			if(G.hand[thisPlayer][m] == copper || G.hand[thisPlayer][m] == silver || G.hand[thisPlayer][m] == gold){
