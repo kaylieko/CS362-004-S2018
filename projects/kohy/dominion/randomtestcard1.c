@@ -16,7 +16,7 @@
 #include <time.h>
 
 #define TESTCARD "great_hall"
-#define NUM_TESTS 10
+#define NUM_TESTS 1000
 
 void asserttrue (int test, int expect){
 	if (test == expect){
