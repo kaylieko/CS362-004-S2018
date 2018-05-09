@@ -65,7 +65,7 @@ int main(){
 		//printf("%d\n", thisPlayer);
 
 		//random number of cards in deck
-		G.deckCount[thisPlayer] = rand() % (MAX_DECK - 3 + 1) + 3;
+		G.deckCount[thisPlayer] = rand() % MAX_DECK;
 
 		//random number of cards in hand
 		G.handCount[thisPlayer] = rand() % MAX_HAND;
@@ -75,11 +75,11 @@ int main(){
 
 		printf ("------------------------------------------------------------------------------------\n");
 		//printf("Number of Actions this player originally has: %i\n", G.numActions);
-		printf("Deck1: %i \n", G.deckCount[thisPlayer]);
+		//printf("Deck1: %i \n", G.deckCount[thisPlayer]);
 		//great_hall card effect	
 		cardEffect(great_hall, choice1, choice2, choice3, &testG, handPos, 0);
 
-		printf("Deck2: %i \n", testG.deckCount[thisPlayer]);
+		//printf("Deck2: %i \n", testG.deckCount[thisPlayer]);
 		//check num of cards in hand, supposed to get +1(drawn)-1(played) after great_hall
 		expectedResult = G.handCount[thisPlayer] + drawnCard - playedCard;
 		printf ("[Test1] Expected cards in HAND: %d vs. Tested cards in HAND: %d ", expectedResult, testG.handCount[thisPlayer]);
