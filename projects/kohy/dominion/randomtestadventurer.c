@@ -71,10 +71,11 @@ int main(){
 		treasureHand = 0;
 		for(m = 0; m < G.handCount[thisPlayer]; m++){
 			G.hand[thisPlayer][m] = rand() % NUM_CARDS;
-            if(G.hand[thisPlayer][m] == copper || G.hand[thisPlayer][m] == silver || G.hand[thisPlayer][m] == gold){
-                treasureHand++;
-            }
-        }
+			if(G.hand[thisPlayer][m] == copper || G.hand[thisPlayer][m] == silver || G.hand[thisPlayer][m] == gold){
+				treasureHand++;
+			}
+		}
+
 		// at least one adventurer is present in current player's hand
     	G.hand[thisPlayer][0] = adventurer;
 
@@ -86,10 +87,10 @@ int main(){
 
 		postTreasureHand = 0;
 		for(m = 0; m < G.handCount[thisPlayer]; m++){
-            if(G.hand[thisPlayer][m] == copper || G.hand[thisPlayer][m] == silver || G.hand[thisPlayer][m] == gold){
-                postTreasureHand++;
-            }
-        }
+			if(G.hand[thisPlayer][m] == copper || G.hand[thisPlayer][m] == silver || G.hand[thisPlayer][m] == gold){
+				postTreasureHand++;
+			}
+		}
 
 		printf ("[Result] Expected treasures in HAND: %d vs. Tested treasures in HAND: %d ", treasureHand + 2, postTreasureHand);
 		//asserttrue(postTreasureHand, treasureHand + 2);
