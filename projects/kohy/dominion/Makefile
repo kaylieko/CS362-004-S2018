@@ -39,9 +39,9 @@ randomtestcard2: randomtestcard2.c dominion.o rngs.o
 	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
 
 runrandom: randomtestcard1 randomtestcard2 randomtestadventurer
-	./randomtestcard1 &> randomtestresult.out
-	./randomtestcard2 &> randomtestresult.out
-	./randomtestadventurer &> randomtestresult.out
+	./randomtestcard1 >> randomtestresult.out
+	./randomtestcard2 >> randomtestresult.out
+	./randomtestadventurer >> randomtestresult.out
 	gcov dominion.c >> randomtestresult.out
 	cat dominion.c.gcov >> randomtestresult.out
 
