@@ -67,7 +67,9 @@ int main(){
 
 		//random number of cards in hand
 		G.handCount[thisPlayer] = rand() % MAX_HAND;
-		//G.hand[thisPlayer][0] = village;
+
+		// at least one adventurer is present in current player's hand
+		G.hand[thisPlayer][0] = village;
 
 		//copy gameState
 		memcpy(&testG, &G, sizeof(struct gameState));
