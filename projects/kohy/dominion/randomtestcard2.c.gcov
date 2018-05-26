@@ -1,0 +1,111 @@
+        -:    0:Source:randomtestcard2.c
+        -:    0:Graph:randomtestcard2.gcno
+        -:    0:Data:randomtestcard2.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:/************************************************************************
+        -:    2:*	Assignment4 Hyejin Ko
+        -:    3:*	randomtestcard2.c Village
+        -:    4:* 
+        -:    5:*	randomtestcard2: randomtestcard2.c dominion.o rngs.o
+        -:    6:*		gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+        -:    7:************************************************************************/
+        -:    8:#include "dominion.h"
+        -:    9:#include "dominion_helpers.h"
+        -:   10:#include "rngs.h"
+        -:   11:#include <string.h>
+        -:   12:#include <stdio.h>
+        -:   13:#include <assert.h>
+        -:   14:#include <stdlib.h>
+        -:   15:#include <math.h>
+        -:   16:#include <time.h>
+        -:   17:
+        -:   18:#define TESTCARD "village"
+        -:   19:#define NUM_TESTS 1000
+        -:   20:
+        -:   21:void asserttrue (int test, int expect){
+     8000:   22:	if (test == expect){
+     6676:   23:		printf("--> [Test PASSED!]\n");
+     6676:   24:	} 
+        -:   25:	else {
+     1324:   26:		printf("--> [Test FAILED!]\n");
+        -:   27:	}
+     8000:   28:}
+        -:   29:
+        -:   30:int main(){
+        2:   31:	int seed = 1000;
+        2:   32:	int thisPlayer = 0;
+        2:   33:	int handPos = 0;
+        2:   34:	int choice1 = 0;
+        2:   35:	int choice2 = 0;
+        2:   36:	int choice3 = 0;
+        2:   37:	int playedCard = 1;		// 1 village card will be played
+        2:   38:	int drawnCard = 1;		// increase player's handsize by drawing 1 card
+        -:   39:
+        2:   40:	int k[10] = {adventurer, smithy, council_room, village, great_hall, gardens, steward, feast, minion, embargo};
+        -:   41:	
+        -:   42:	struct gameState G, testG;
+        -:   43:
+        -:   44:	int i;
+        -:   45:	int numPlayers;
+        -:   46:	int expectedResult;
+        -:   47:	//int numDeckCards;
+        -:   48:
+        2:   49:	printf ("\n=====================================================\n");
+        2:   50:	printf ("	  RANDOM CARD TEST 2 Village	\n");
+        2:   51:	printf ("=====================================================\n");
+        -:   52:
+        2:   53:	srand(time(NULL));
+     4004:   54:	for (i = 0; i < NUM_TESTS; i++){
+        -:   55:		//random numPlayers (min.2 to max.4)
+     2000:   56:		numPlayers = rand() % 3 + 2;
+        -:   57:
+        -:   58:		//initialize the game
+     2000:   59:		initializeGame (numPlayers, k, seed, &G);
+        -:   60:
+        -:   61:		//random current player
+     2000:   62:		thisPlayer = rand() % numPlayers;
+        -:   63:		//printf("%d\n", thisPlayer);
+        -:   64:
+        -:   65:		//random number of cards in deck
+     2000:   66:		G.deckCount[thisPlayer] = rand() % MAX_DECK;
+        -:   67:
+        -:   68:		//random number of cards in hand
+     2000:   69:		G.handCount[thisPlayer] = rand() % MAX_HAND;
+        -:   70:
+        -:   71:		// at least one adventurer is present in current player's hand
+     2000:   72:		G.hand[thisPlayer][0] = village;
+        -:   73:
+        -:   74:		//copy gameState
+     2000:   75:		memcpy(&testG, &G, sizeof(struct gameState));
+        -:   76:
+     2000:   77:		printf ("------------------------------------------------------------------------------------\n");
+        -:   78:		//printf("Number of Actions this player originally has: %i\n", G.numActions);
+        -:   79:
+        -:   80:		//great_hall card effect	
+     2000:   81:		cardEffect(village, choice1, choice2, choice3, &testG, handPos, 0);
+        -:   82:
+        -:   83:
+        -:   84:		//check num of cards in hand, supposed to get +1(drawn)-1(played) after great_hall
+     2000:   85:		expectedResult = G.handCount[thisPlayer] + drawnCard - playedCard;
+     2000:   86:		printf ("[Test1] Expected cards in HAND: %d vs. Tested cards in HAND: %d ", expectedResult, testG.handCount[thisPlayer]);
+     2000:   87:		asserttrue(testG.handCount[thisPlayer], expectedResult);
+        -:   88:
+        -:   89:		//check num of cards in deck, supposed to have -1
+        -:   90:		//village: player gets 1 card in hand from his deck
+     2000:   91:		expectedResult = G.deckCount[thisPlayer] - 1;
+     2000:   92:		printf ("[Test2] Expected cards in DECK: %d vs. Tested cards in DECK: %d ", expectedResult, testG.deckCount[thisPlayer]);
+     2000:   93:		asserttrue(testG.deckCount[thisPlayer], expectedResult);
+        -:   94:
+        -:   95:		//check num of actions, supposed to get +2 after village
+     2000:   96:		printf ("[Test3] Expected numActions: %d vs. Tested numActions: %d ", G.numActions + 2, testG.numActions);
+     2000:   97:		asserttrue(testG.numActions, G.numActions+ 2);
+        -:   98:
+        -:   99:		//check num of played card
+     2000:  100:		printf ("[Test4] Expected playedCard: %d vs. Tested playedCard: %d ", G.playedCardCount + playedCard, testG.playedCardCount);
+     2000:  101:		asserttrue(testG.playedCardCount, G.playedCardCount + playedCard);
+     2000:  102:	}
+        -:  103:
+        2:  104:	return 0;
+        -:  105:}
+        -:  106:

@@ -1,0 +1,109 @@
+        -:    0:Source:randomtestadventurer.c
+        -:    0:Graph:randomtestadventurer.gcno
+        -:    0:Data:randomtestadventurer.gcda
+        -:    0:Runs:5
+        -:    0:Programs:1
+        -:    1:/************************************************************************
+        -:    2:*	Assignment4 Hyejin Ko
+        -:    3:*	randomtestadventurer.c Adventurer
+        -:    4:* 
+        -:    5:*	randomtestadventurer: randomtestadventurer.c dominion.o rngs.o
+        -:    6:*		gcc -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+        -:    7:************************************************************************/
+        -:    8:#include "dominion.h"
+        -:    9:#include "dominion_helpers.h"
+        -:   10:#include "rngs.h"
+        -:   11:#include <string.h>
+        -:   12:#include <stdio.h>
+        -:   13:#include <assert.h>
+        -:   14:#include <stdlib.h>
+        -:   15:#include <math.h>
+        -:   16:#include <time.h>
+        -:   17:
+        -:   18:#define TESTCARD "adventurer"
+        -:   19:#define NUM_TESTS 1000
+        -:   20:#define NUM_CARDS 27
+        -:   21:
+        -:   22:
+        -:   23:int main(){
+        5:   24:	int seed = 1000;
+        5:   25:	int thisPlayer = 0;
+        5:   26:	int handPos = 0;
+        5:   27:	int choice1 = 0;
+        5:   28:	int choice2 = 0;
+        5:   29:	int choice3 = 0;
+        5:   30:	int error = 0;
+        5:   31:	int k[10] = {adventurer, smithy, council_room, village, great_hall, gardens, steward, feast, minion, embargo};
+        -:   32:
+        -:   33:	struct gameState G;
+        -:   34:	int i, j, m;
+        -:   35:	int numPlayers;
+        -:   36:	int treasureHand;
+        -:   37:	int postTreasureHand;
+        -:   38:
+        5:   39:	printf ("\n===============================================================\n");
+        5:   40:	printf ("	  	RANDOMTEST Adventurer		\n");
+        5:   41:	printf ("===============================================================\n");
+        -:   42:
+        5:   43:	srand(time(NULL));
+        -:   44:
+    10010:   45:	for (i = 0; i < NUM_TESTS; i++){
+     5000:   46:		numPlayers = rand() % 3 + 1 ;	//random numPlayers (min.2 to max.4)
+        -:   47:
+     5000:   48:		initializeGame (numPlayers, k, seed, &G);	//initialize the game
+        -:   49:
+        -:   50:		//set random gamestate
+     5000:   51:		thisPlayer = rand() % numPlayers;
+     5000:   52:		G.whoseTurn = thisPlayer;
+     5000:   53:		G.handCount[thisPlayer] = rand() % MAX_HAND;
+     5000:   54:		G.deckCount[thisPlayer] = rand() % MAX_DECK;
+        -:   55:	
+        -:   56:		//set player's deck with random cards
+  2510136:   57:		for(j = 0; j < G.deckCount[thisPlayer]; j++){			
+        -:   58:			//put 25% random chance of random treasure cards (#4copper, 5silver, 6gold) in deck
+  1250068:   59:			if (rand() % 4 == 0){
+   312026:   60:				G.deck[thisPlayer][j] = rand() % 3 + 4;
+   312026:   61:			} 
+        -:   62:			//put cards from k[10] array into the deck
+        -:   63:			else {
+   938042:   64:				G.deck[thisPlayer][j] = k[rand()%10];
+        -:   65:			}
+  1250068:   66:		}
+        -:   67:
+        -:   68:		//set player's hand with random cards
+     5000:   69:		treasureHand = 0;
+  2521124:   70:		for(m = 0; m < G.handCount[thisPlayer]; m++){
+  1255562:   71:			G.hand[thisPlayer][m] = rand() % NUM_CARDS;
+  3626727:   72:			if(G.hand[thisPlayer][m] == copper || G.hand[thisPlayer][m] == silver || G.hand[thisPlayer][m] == gold){
+   139780:   73:				treasureHand++;
+   139780:   74:			}
+  1255562:   75:		}
+        -:   76:
+        -:   77:		// at least one adventurer is present in current player's hand
+     5000:   78:		G.hand[thisPlayer][0] = adventurer;
+        -:   79:
+        -:   80:
+        -:   81:		//adventurer card effect	
+     5000:   82:		cardEffect(adventurer, choice1, choice2, choice3, &G, handPos, 0);
+        -:   83:
+        -:   84:
+        -:   85:		//check number of treasures in hand after adventurer card
+     5000:   86:		postTreasureHand = 0;
+  2540072:   87:		for(m = 0; m < G.handCount[thisPlayer]; m++){
+  3645772:   88:			if(G.hand[thisPlayer][m] == copper || G.hand[thisPlayer][m] == silver || G.hand[thisPlayer][m] == gold){
+   149091:   89:				postTreasureHand++;
+   149091:   90:			}
+  1265036:   91:		}
+        -:   92:
+     5000:   93:		printf ("[Result] Expected treasures in HAND: %d vs. Tested treasures in HAND: %d ", treasureHand + 2, postTreasureHand);
+        -:   94:		//asserttrue(postTreasureHand, treasureHand + 2);
+     5000:   95:		if (postTreasureHand != treasureHand + 2){
+      631:   96:			error++;
+      631:   97:			printf("[Error]");
+      631:   98:		} 
+     5000:   99:		printf("\n");
+     5000:  100:	}
+        5:  101:	printf("Total Errors: %d \n", error);
+        5:  102:	return 0;
+        -:  103:}
+        -:  104:
